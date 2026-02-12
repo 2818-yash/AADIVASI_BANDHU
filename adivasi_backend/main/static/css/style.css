@@ -1,0 +1,406 @@
+/* Global reset & box-sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Header */
+header {
+  background-color: #4f885a;
+  text-align: center;
+  padding: 1px;
+  position: relative;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: center;
+  background-color: #6a994e;
+  padding: 10px 0;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  margin: 0 15px;
+  font-weight: bold;
+}
+
+nav a:hover {
+  color: #f0f6f4;
+}
+
+/* Profile / Auth links */
+.auth-links {
+  position: absolute;
+  top: 10px;
+  right: 16px;
+  z-index: 1000;
+}
+
+.profile-dropdown {
+  position: relative;
+}
+
+.profile-trigger {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  color: white;
+}
+
+.profile-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.profile-name {
+  font-size: 18px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.profile-menu-box {
+  position: absolute;
+  top: 52px;
+  right: 0;
+  width: 180px;
+  background: #065705e8;
+  border-radius: 10px;
+  box-shadow: 0 12px 30px rgba(0,0,0,0.2);
+  padding: 8px 0;
+  display: none;
+}
+
+.profile-item {
+  display: block;
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #333;
+  text-decoration: none;
+}
+
+.profile-item:hover {
+  background: #f3f4f6;
+  color: #000;
+}
+
+.profile-item.logout {
+  color: #dc3545;
+  font-weight: 600;
+}
+
+.profile-menu-box hr {
+  margin: 6px 0;
+  border: none;
+  border-top: 1px solid #eee;
+}
+
+/* Hero section */
+.hero {
+  min-height: 30vh;
+  max-height: 30vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  position: relative;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  font-weight: bold;
+  z-index: 2;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+  z-index: 2;
+}
+
+.hero .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 1;
+}
+
+/* Image container */
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 2vh; /* probably what you meant instead of 5vh */
+}
+
+.white-logo {
+  filter: brightness(0) invert(1);
+  width: 250px;
+  height: auto;
+  margin: 110px 0 105px;
+}
+
+/* Sections / Cards */
+.sections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 30px 20px;
+  gap: 25px;
+  flex: 1;
+}
+
+.card {
+  background-color: #fff;
+  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  text-align: center;
+  transition: 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  height: 280px;
+}
+
+.card img.card-img-top {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+}
+
+.card h3 {
+  color: #386641;
+  margin: 10px 0 5px;
+}
+
+.card p {
+  font-size: 0.95rem;
+  color: #555;
+  padding: 0 10px;
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.card:hover {
+  border: 2px solid gainsboro;
+  box-shadow: 4px 4px 12px rgba(0,0,0,0.2);
+  transform: scale(1.05);
+}
+
+/* Avatar Modal */
+.avatar-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.85); /* fallback */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  padding: 16px;
+}
+
+@supports (backdrop-filter: blur(12px)) or (-webkit-backdrop-filter: blur(12px)) {
+  .avatar-modal {
+    background: rgba(255, 255, 255, 0.55);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+  }
+}
+
+.avatar-card {
+  background: #ffffff;
+  width: 720px;
+  max-width: 100%;
+  height: 520px;
+  border-radius: 18px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+}
+
+.avatar-card h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.avatar-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.avatar-option {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  cursor: pointer;
+  object-fit: cover;
+  border: 4px solid transparent;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+}
+
+.avatar-option:hover {
+  transform: scale(1.5);
+  z-index: 5;
+}
+
+.avatar-grid:hover .avatar-option {
+  opacity: 0.4;
+}
+
+.avatar-grid:hover .avatar-option:hover {
+  opacity: 1;
+}
+
+.avatar-option.selected {
+  border-color: #198754;
+  box-shadow: 0 0 0 4px rgba(25,135,84,0.25);
+}
+
+.avatar-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.avatar-actions button {
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.avatar-actions .primary {
+  background: #198754;
+  color: white;
+}
+
+/* Footer */
+footer {
+  background-color: #386641;
+  color: white;
+  text-align: center;
+  padding: 15px;
+  margin-top: auto;
+}
+
+/* ────────────────────────────────────────────────
+   RESPONSIVE
+───────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+  .profile-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .profile-name {
+    display: none;
+  }
+
+  .profile-menu-box {
+    right: 0;
+    top: 48px;
+  }
+
+  .avatar-card {
+    width: 100%;
+    height: 100%;
+    border-radius: 0;
+    padding: 16px;
+  }
+
+  .avatar-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+  }
+
+  .avatar-option {
+    width: 80px;
+    height: 80px;
+  }
+
+  .avatar-actions {
+    justify-content: center;
+  }
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .sections {
+    padding: 20px 10px;
+  }
+
+  .card {
+    width: 100%;
+    max-width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .avatar-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .avatar-option {
+    width: 72px;
+    height: 72px;
+  }
+
+  .avatar-card h3 {
+    font-size: 18px;
+  }
+
+  .hero h1 {
+    font-size: 1.8rem;
+  }
+}
+
+/* Disable hover effects on touch devices */
+@media (hover: none) {
+  .avatar-option:hover {
+    transform: none;
+  }
+
+  .avatar-grid:hover .avatar-option {
+    opacity: 1;
+  }
+
+  .card:hover {
+    transform: none;
+    border: none;
+  }
+}
+
+
+

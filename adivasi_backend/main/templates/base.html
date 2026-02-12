@@ -1,0 +1,266 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>{% block title %}Adivasi Bandhu | Tribal Schemes Platform{% endblock %}</title>
+
+  <!-- PWA -->
+  <meta name="theme-color" content="#006400">
+  <link rel="manifest" href="{% static 'manifest.json' %}">
+  <link rel="icon" type="image/png" href="{% static 'icons/icon-72x72.png' %}">
+
+  <!-- Bootstrap -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+  />
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/support_chat.css' %}">
+
+  <!-- Auth links positioning -->
+  <style>
+    .auth-links {
+      position: absolute;
+      top: 12px;
+      right: 20px;
+      display: flex;
+      gap: 12px;
+      font-weight: bold;
+      z-index: 1000;
+    }
+
+    .auth-links a {
+      color: white;
+      text-decoration: none;
+    }
+
+    .auth-links a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+
+{% comment %} ================= HEADER / NAVBAR ================= {% endcomment %}
+{% if request.path != '/signin/' and request.path != '/signup/' %}
+  {% include "components/header.html" %}
+  {% include "components/navbar.html" %}
+
+  <div class="auth-links">
+    {% if user.is_authenticated %}
+      <div class="profile-dropdown">
+        <div class="profile-trigger" id="profileTrigger">
+          <img
+            src="{{ user.profile.profile_pic.url }}"
+            class="profile-avatar"
+            alt="Profile"
+          />
+          <span class="profile-name">
+            Welcome {{ user.username|upper }}
+          </span>
+        </div>
+
+        <div class="profile-menu-box" id="profileMenu">
+          <a href="#" class="profile-item">👤 My Profile</a>
+          <a href="javascript:void(0)" onclick="openAvatarModal()" class="profile-item">
+            ⚙️ Settings
+          </a>
+          <hr>
+          <a href="{% url 'logout' %}" class="profile-item logout">
+            🚪 Logout
+          </a>
+        </div>
+      </div>
+    {% else %}
+      <a href="{% url 'signin' %}">Login</a>
+      <a href="{% url 'signup' %}">Register</a>
+    {% endif %}
+  </div>
+{% endif %}
+
+<main class="flex-grow-1">
+  {% block content %}{% endblock %}
+</main>
+
+{% comment %} ================= FOOTER ================= {% endcomment %}
+{% if request.path != '/signin/' and request.path != '/signup/' %}
+  {% include "components/footer.html" %}
+{% endif %}
+
+{% comment %} ================= SUPPORT CHAT ================= {% endcomment %}
+{% if user.is_authenticated and request.path != '/signin/' and request.path != '/signup/' %}
+
+<div id="chat-overlay" class="hidden"></div>
+
+<div id="chat-fab">
+  📧
+  <span id="chat-unread-badge" class="unread-badge hidden">0</span>
+</div>
+
+<div id="chat-box" class="hidden">
+  <div class="chat-header">
+    <span>Support Chat</span>
+    <button id="chat-close">Close</button>
+  </div>
+
+  {% if user.is_superuser %}
+  <div class="admin-chat-container">
+    <div class="admin-left">
+      <input
+        type="text"
+        id="user-search"
+        class="user-search"
+        placeholder="Search user..."
+      />
+      <div id="admin-user-list" class="admin-user-list"></div>
+    </div>
+
+    <div class="admin-right">
+      <div id="chat-messages" class="chat-messages">
+        <div class="msg admin">
+          Select a user from the left to view chat
+        </div>
+      </div>
+
+      <div class="chat-input">
+        <input type="text" id="chat-input" placeholder="Type your message..." />
+        <button id="chat-send">Send</button>
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div id="chat-messages" class="chat-messages">
+    <div class="msg admin">Hello 👋 How can we help you?</div>
+  </div>
+  <div class="chat-input">
+    <input type="text" id="chat-input" placeholder="Type your message..." />
+    <button id="chat-send">Send</button>
+  </div>
+  {% endif %}
+</div>
+
+<script>
+  const CURRENT_USERNAME = "{{ request.user.username }}";
+</script>
+<script src="{% static 'js/support_chat.js' %}"></script>
+
+{% endif %}
+
+{% comment %} ================= AVATAR MODAL ================= {% endcomment %}
+<div id="avatarModal" class="avatar-modal hidden">
+  <div class="avatar-card">
+    <h3>Select Your Avatar</h3>
+
+    <div class="avatar-grid">
+      {% for i in "12345678910"|make_list %}
+        <img
+          src="/media/default_avatars/avatar{{ forloop.counter }}.png"
+          class="avatar-option"
+          data-avatar="avatar{{ forloop.counter }}.png"
+          alt="Avatar {{ forloop.counter }}"
+        />
+      {% endfor %}
+    </div>
+
+    <div class="avatar-actions">
+      <button onclick="closeAvatarModal()">Cancel</button>
+      <button onclick="saveAvatar()" class="primary">Save</button>
+    </div>
+  </div>
+</div>
+
+{% comment %} ================= SCRIPTS ================= {% endcomment %}
+<script>
+  let selectedAvatar = null;
+
+  function openAvatarModal() {
+    document.getElementById("avatarModal").classList.remove("hidden");
+  }
+
+  function closeAvatarModal() {
+    document.getElementById("avatarModal").classList.add("hidden");
+  }
+
+  document.querySelectorAll(".avatar-option").forEach(img => {
+    img.addEventListener("click", () => {
+      document.querySelectorAll(".avatar-option")
+        .forEach(i => i.classList.remove("selected"));
+      img.classList.add("selected");
+      selectedAvatar = img.dataset.avatar;
+    });
+  });
+
+  function saveAvatar() {
+    if (!selectedAvatar) {
+      alert("Please select an avatar");
+      return;
+    }
+
+    fetch("/update-avatar/", {
+      method: "POST",
+      headers: {
+        "X-CSRFToken": "{{ csrf_token }}",
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ avatar: selectedAvatar })
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.success) location.reload();
+    });
+  }
+</script>
+
+<script>
+  document.addEventListener("click", function (e) {
+    const trigger = document.getElementById("profileTrigger");
+    const menu = document.getElementById("profileMenu");
+
+    if (!trigger || !menu) return;
+
+    if (trigger.contains(e.target)) {
+      menu.style.display =
+        menu.style.display === "block" ? "none" : "block";
+    } else {
+      menu.style.display = "none";
+    }
+  });
+</script>
+
+<script>
+  (function () {
+    const enabled = localStorage.getItem("highContrast") === "true";
+    if (enabled) document.body.classList.add("high-contrast");
+  })();
+
+  function toggleContrast() {
+    const enabled = document.body.classList.toggle("high-contrast");
+    localStorage.setItem("highContrast", enabled);
+  }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  if ("serviceWorker" in navigator) {
+    window.addEventListener("load", function () {
+      navigator.serviceWorker
+        .register("{% static 'service-worker.js' %}")
+        .then(reg => console.log("SW registered:", reg.scope))
+        .catch(err => console.error("SW failed:", err));
+    });
+  }
+</script>
+
+</body>
+</html>

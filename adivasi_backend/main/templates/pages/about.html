@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}How to Apply | Adivasi Bandhu{% endblock %}
+
+{% block content %}
+
+<div class="container py-5">
+    <h1 class="text-center mb-4">How to Apply for Schemes</h1>
+
+    <p class="lead text-center">
+        Follow the steps below to apply for government schemes available for tribal communities.
+    </p>
+
+    <div class="mt-4">
+        <h3>Step-by-Step Process</h3>
+        <ol class="fs-5">
+            <li>Visit the official government portal for your selected scheme.</li>
+            <li>Register using your mobile number, email, or Aadhaar details.</li>
+            <li>Fill in all the required personal and family details.</li>
+            <li>Upload the necessary documents such as ID proof, caste certificate, income certificate, etc.</li>
+            <li>Submit the form and note the application ID for tracking.</li>
+        </ol>
+    </div>
+
+    <div class="mt-4">
+        <h3>Documents Required</h3>
+        <ul class="fs-5">
+            <li>Aadhaar Card</li>
+            <li>Caste Certificate (Tribal)</li>
+            <li>Income Certificate</li>
+            <li>Bank Passbook</li>
+            <li>Address Proof</li>
+            <li>Passport-size Photograph</li>
+        </ul>
+    </div>
+
+    <div class="alert alert-success mt-4">
+        For any help or guidance, visit the <a href="{% url 'help' %}">Help Page</a>.
+    </div>
+</div>
+
+{% endblock %}

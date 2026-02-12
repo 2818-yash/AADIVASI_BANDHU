@@ -1,0 +1,260 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Adivasi Bandhu | Tribal Schemes Platform{% endblock %}
+
+{% block content %}
+
+
+
+
+
+<!-- ================= HERO CAROUSEL ================= -->
+<div id="heroCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+  <div class="carousel-inner">
+
+    <div class="carousel-item active">
+      <div class="hero text-center d-flex flex-column justify-content-center align-items-center"
+           style="background:url('{% static 'images/slide1.png' %}') center/cover; height:15vh; color:#fff;">
+        <h1>Explore Benefits for Every Stage of Life</h1>
+        <p>Education • Health • Jobs • Support for Women & Elders</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <div class="hero text-center d-flex flex-column justify-content-center align-items-center"
+           style="background:url('{% static 'images/slide2.png' %}') center/cover; height:15vh; color:#fff;">
+        <h1>Together for Tribal Empowerment</h1>
+        <p>community and collective growth theme</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <div class="hero text-center d-flex flex-column justify-content-center align-items-center"
+           style="background:url('{% static 'images/slide3.png' %}') center/cover; height:15vh; color:#fff;">
+        <h1>Connecting You with Government Support</h1>
+        <p>Housing • Farming • Culture • Women & Child Welfare</p>
+      </div>
+    </div>
+
+    <div class="carousel-item">
+      <div class="hero text-center d-flex flex-column justify-content-center align-items-center"
+           style="background:url('{% static 'images/slide4.png' %}') center/cover; height:15vh; color:#fff;">
+        <h1>Empowering Tribal Communities</h1>
+        <p>Discover schemes that change lives</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ================= SECTIONS ================= -->
+<div class="sections d-flex flex-wrap justify-content-center gap-3 p-4" id="pageContent">
+
+  <a href="{% url 'scheme' %}" class="card-link">
+    <div class="card" style="width:18rem;">
+      <img src="https://icert.net.in/assets/img/gallery/gal_simdega/simdega_1.jpg" class="card-img-top"/>
+      <div class="card-body">
+        <h3>Health</h3>
+        <p>Pensions, medical support, tribal senior programs.</p>
+      </div>
+    </div>
+  </a>
+
+  <a href="{% url 'scheme' %}" class="card-link">
+    <div class="card" style="width:18rem;">
+      <img src="https://static.wixstatic.com/media/9a95cd_c758a7491844493db35e47b16e5bb592~mv2.jpg" class="card-img-top"/>
+      <div class="card-body">
+        <h3>Education</h3>
+        <p>Scholarships, coaching, hostels, digital education.</p>
+      </div>
+    </div>
+  </a>
+
+  <a href="{% url 'scheme' %}" class="card-link">
+    <div class="card" style="width:18rem;">
+      <img src="https://www.assocham.org/CoEtribalentrepreneur/assets/images/media.jpg" class="card-img-top"/>
+      <div class="card-body">
+        <h3>Employment</h3>
+        <p>Equality and Opportunity for Tribal Empowerment.</p>
+      </div>
+    </div>
+  </a>
+
+  <a href="{% url 'scheme' %}" class="card-link">
+    <div class="card" style="width:18rem;">
+      <img src="https://www.iwcwtministry.org/wp-content/uploads/2024/08/Women-And-Child-Welfare-Schemes-in-India.jpg" class="card-img-top"/>
+      <div class="card-body">
+        <h3>Others</h3>
+        <p>Housing, farming support, women & child welfare.</p>
+      </div>
+    </div>
+  </a>
+
+</div>
+
+<!-- ================= ACCESSIBILITY PANEL ================= -->
+<div class="text-center my-4">
+
+  <button onclick="readPage()" class="btn btn-success btn-sm">🔊 Read Page</button>
+  <button onclick="startVoiceCommand()" class="btn btn-primary btn-sm">🎙️ Voice Command</button>
+  <button onclick="toggleContrast()" class="btn btn-dark btn-sm">♿ High Contrast</button>
+  <button onclick="increaseFont()" class="btn btn-secondary btn-sm">A+</button>
+  <button onclick="decreaseFont()" class="btn btn-secondary btn-sm">A-</button>
+
+</div>
+
+<!-- ================= VOICE DATA ================= -->
+<p id="voiceText" style="display:none;">
+  This page provides information about government schemes related to health,
+  education, employment, housing and welfare for tribal communities.
+</p>
+
+<!-- ================= VOICE & ACCESSIBILITY SCRIPT ================= -->
+<script>
+/* ---------- LANGUAGE DETECTION ---------- */
+function getLang() {
+  const m = document.cookie.match(/googtrans=\/en\/(\w+)/);
+  if (!m) return "en-IN";
+  if (m[1] === "hi") return "hi-IN";
+  if (m[1] === "mr") return "mr-IN";
+  return "en-IN";
+}
+
+/* ---------- AUTO READ PAGE ---------- */
+function readPage() {
+  const text = document.getElementById("pageContent").innerText;
+  speechSynthesis.cancel();
+  const s = new SpeechSynthesisUtterance(text);
+  s.lang = getLang();
+  speechSynthesis.speak(s);
+}
+
+/* ---------- VOICE COMMANDS ---------- */
+
+function startVoiceCommand() {
+  // Browser support check
+  if (!('webkitSpeechRecognition' in window)) {
+    alert("Voice commands are supported only in Chrome or Edge browser.");
+    return;
+  }
+
+  const recognition = new webkitSpeechRecognition();
+
+  // 🔥 SAFE language selection
+  const lang = getLang();
+  recognition.lang = (lang === "mr-IN") ? "hi-IN" : lang; 
+  recognition.continuous = false;
+  recognition.interimResults = false;
+
+  recognition.start();
+
+  recognition.onstart = function () {
+    alert("🎙️ Listening... Please speak now");
+  };
+
+  recognition.onresult = function (event) {
+    const command = event.results[0][0].transcript.toLowerCase();
+    alert("You said: " + command);
+
+    // 🔥 COMMAND MATCHING
+    if (command.includes("health")) {
+      window.location.href = "{% url 'scheme' %}?category=health";
+    } 
+    else if (command.includes("education")) {
+      window.location.href = "{% url 'scheme' %}?category=education";
+    } 
+    else if (command.includes("employment") || command.includes("job")) {
+      window.location.href = "{% url 'scheme' %}?category=employment";
+    } 
+    else {
+      alert("Command not recognized. Try: Health schemes, Education schemes");
+    }
+  };
+
+  recognition.onerror = function (event) {
+    alert("Voice error: " + event.error);
+  };
+
+  recognition.onend = function () {
+    console.log("Voice recognition stopped");
+  };
+}
+
+
+
+/* ---------- ACCESSIBILITY ---------- */
+let fontSize = 16;
+
+function increaseFont() {
+  fontSize += 2;
+  document.body.style.fontSize = fontSize + "px";
+}
+
+function decreaseFont() {
+  fontSize -= 2;
+  document.body.style.fontSize = fontSize + "px";
+}
+
+function toggleContrast() {
+  document.body.classList.toggle("high-contrast");
+}
+</script>
+
+<!-- ================= ACCESSIBILITY STYLE ================= -->
+<style>
+/* 🔗 Card link reset */
+.card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ♿ HIGH CONTRAST MODE */
+.high-contrast {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+/* Force ALL text to white */
+.high-contrast * {
+  color: #fff !important;
+}
+
+/* Cards */
+.high-contrast .card {
+  background-color: #111 !important;
+  border: 1px solid #444 !important;
+}
+
+/* Card text */
+.high-contrast .card-body,
+.high-contrast .card-body h3,
+.high-contrast .card-body p {
+  color: #fff !important;
+}
+
+/* Navbar */
+.high-contrast .navbar,
+.high-contrast .nav-link,
+.high-contrast .navbar-brand {
+  color: #fff !important;
+}
+
+/* Buttons (keep readable) */
+.high-contrast .btn {
+  background-color: #222 !important;
+  color: #fff !important;
+  border: 1px solid #666 !important;
+}
+
+/* Inputs & Selects */
+.high-contrast input,
+.high-contrast select {
+  background-color: #111 !important;
+  color: #fff !important;
+  border: 1px solid #666 !important;
+}
+</style>
+
+
+{% endblock %}

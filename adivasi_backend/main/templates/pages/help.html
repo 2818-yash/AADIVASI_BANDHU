@@ -1,0 +1,195 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Get Help | Adivasi Bandhu{% endblock %}
+
+{% block content %}
+
+<!-- SUCCESS ALERT -->
+{% if messages %}
+  {% for message in messages %}
+    <div class="alert text-center p-2" style="background:#4CAF50;color:white;font-weight:bold;">
+      {{ message }}
+    </div>
+  {% endfor %}
+{% endif %}
+
+<!-- Section: Welcome -->
+<section class="py-5 text-center bg-light">
+  <div class="container">
+    <h1 class="fw-bold text-success">We Are Here to Help</h1>
+    <p class="lead mt-3">
+      Get answers, guidance, and personalized support for all tribal government schemes.
+    </p>
+  </div>
+</section>
+
+<!-- Section: Support Options -->
+<section class="container py-5">
+  <div class="row g-4">
+
+    <div class="col-md-4">
+      <div class="card shadow-lg border-0 h-100 p-4 text-center hover-card">
+        <i class="fas fa-comments fa-3x text-success mb-3"></i>
+        <h5 class="fw-bold">Personal Scheme Guidance</h5>
+        <p>
+          Get step-by-step help in understanding eligibility and applying for the right scheme.
+        </p>
+        <a href="{% url 'contact' %}" class="btn btn-success">Talk to Advisor</a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-lg border-0 h-100 p-4 text-center hover-card">
+        <i class="fas fa-users fa-3x text-primary mb-3"></i>
+        <h5 class="fw-bold">Community Support</h5>
+        <p>
+          Join local tribal support groups, workshops, and awareness programs near you.
+        </p>
+        <a href=" https://chat.whatsapp.com/Kl4D0e58VdOCsLFWznkQpg " class="btn btn-primary">
+          Join Community
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card shadow-lg border-0 h-100 p-4 text-center hover-card">
+        <i class="fas fa-map-marked-alt fa-3x text-warning mb-3"></i>
+        <h5 class="fw-bold">Location Based Help</h5>
+        <p>
+          Find the nearest tribal welfare office, NGOs, or support centers in your district.
+        </p>
+   <a href="https://www.bing.com/maps/search?mepi=0%7ELocal%7EEmbedded%7ELargeMapLink&ty=17&poicount=18&usebfpr=true&v=2&sV=1&FORM=MPSRPL&q=goverment+schemes+location+of+maharashtra+office&mb=19.106323%7E72.826172%7E18.926582%7E72.856079&ppois=19.1063232421875_72.8560791015625__YN4070x5160921538623668730%7E18.92658233642578_72.826171875__YN4070x16997744089332687045%7E&segment=Local&cp=19.408140%7E74.076626&lvl=9&style=r"
+   class="btn btn-warning text-white fw-bold px-4 py-2"
+   target="_blank"
+   rel="noopener noreferrer">
+    Find location
+</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- Section: Ask a Question -->
+<section class="py-5 bg-success text-white">
+  <div class="container text-center">
+    <h2 class="fw-bold">Ask Your Question</h2>
+    <p class="mb-4">Type your question and upload a screenshot or document if needed.</p>
+
+    <form class="row justify-content-center" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="col-md-6 mb-3">
+        <textarea class="form-control p-3 ask-input" rows="4"
+          placeholder="Type your question here..." name="question" required></textarea>
+      </div>
+
+      <div class="col-md-6 mb-3">
+        <label class="upload-box" for="fileUpload">
+          <i class="fas fa-cloud-upload-alt fa-2x mb-2"></i>
+          <p class="m-0">Click or Drop Your File Here</p>
+          <span id="fileName" class="text-white small d-block mt-2"></span>
+        </label>
+        <input type="file" id="fileUpload" name="fileUpload" class="d-none"
+               accept="image/*,.pdf,.doc,.docx">
+      </div>
+
+      <div class="col-md-6 mb-3" id="previewContainer" style="display:none;">
+        <img id="previewImage" class="img-fluid rounded shadow"
+             style="max-height:200px;">
+      </div>
+
+      <div class="col-md-4 mt-3">
+        <button type="submit" class="btn btn-light w-100 py-3 fw-bold">
+          Submit <i class="fas fa-paper-plane ms-2"></i>
+        </button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="container py-5">
+  <h2 class="text-center fw-bold mb-4 text-success">
+    Frequently Asked Questions
+  </h2>
+  ...
+</section>
+
+<!-- Extra Button Section -->
+<section class="py-5 text-center bg-light">
+  <h3 class="fw-bold mb-3">Still Need Help?</h3>
+  <p>Click the button below to talk to our support team.</p>
+  <a href="{% url 'contact' %}" class="btn btn-success btn-lg">
+    Contact Support
+  </a>
+</section>
+
+<!-- ♿ HIGH CONTRAST FIX (GET HELP PAGE ONLY) -->
+<style>
+/* Light backgrounds → dark */
+.high-contrast .bg-light {
+  background-color: #9e9a9a !important;
+}
+
+/* Headings & text */
+.high-contrast h1,
+.high-contrast h2,
+.high-contrast h3,
+.high-contrast h5,
+.high-contrast p {
+  color: #fff !important;
+}
+
+/* Cards */
+.high-contrast .card {
+  background-color: #111 !important;
+  border: 1px solid #444 !important;
+  box-shadow: none !important;
+}
+
+.high-contrast .card h5,
+.high-contrast .card p {
+  color: #fff !important;
+}
+
+/* Icons */
+.high-contrast i {
+  color: #fff !important;
+}
+
+/* Ask Question section */
+.high-contrast .bg-success {
+  background-color: #379739 !important;
+}
+
+/* Textarea */
+.high-contrast .ask-input {
+  background-color: #000 !important;
+  color: #fff !important;
+  border: 1px solid #666 !important;
+}
+
+.high-contrast .ask-input::placeholder {
+  color: #ccc !important;
+}
+
+/* Upload box */
+.high-contrast .upload-box {
+  background-color: #111 !important;
+  border: 1px dashed #666 !important;
+}
+
+/* Buttons */
+.high-contrast .btn-light {
+  background-color: #222 !important;
+  color: #fff !important;
+  border: 1px solid #666 !important;
+}
+</style>
+
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+{% endblock %}

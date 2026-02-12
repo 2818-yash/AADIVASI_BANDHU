@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}How to Apply | Adivasi Bandhu{% endblock %}
+
+{% block content %}
+
+<!-- Page Banner -->
+<section class="bg-success text-white text-center py-5">
+  <div class="container">
+    <h1 class="fw-bold">How to Apply</h1>
+    <p class="lead">Follow simple steps to apply for government schemes easily.</p>
+  </div>
+</section>
+
+<!-- Steps Section -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <div class="col-md-4">
+        <div class="card shadow h-100 text-center p-4">
+          <div class="mb-3">
+            <i class="bi bi-person-lines-fill display-4 text-primary"></i>
+          </div>
+          <h5 class="fw-bold">Step 1: Register</h5>
+          <p>Sign up with your details and create a user profile to access schemes.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow h-100 text-center p-4">
+          <div class="mb-3">
+            <i class="bi bi-file-earmark-text display-4 text-success"></i>
+          </div>
+          <h5 class="fw-bold">Step 2: Fill Application</h5>
+          <p>Choose the scheme you’re eligible for and complete the online application form.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow h-100 text-center p-4">
+          <div class="mb-3">
+            <i class="bi bi-upload display-4 text-warning"></i>
+          </div>
+          <h5 class="fw-bold">Step 3: Upload Documents</h5>
+          <p>Upload required documents like ID, address proof, and caste certificate.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FAQ Section -->
+<section class="bg-light py-5">
+  <div class="container">
+    <h2 class="text-center mb-4 fw-bold">Frequently Asked Questions</h2>
+
+    <div class="accordion" id="faqAccordion">
+
+      <!-- FAQ 1 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+            Who can apply for these schemes?
+          </button>
+        </h2>
+        <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Any eligible tribal community member can apply based on scheme requirements.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 2 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+            Do I need to visit an office physically?
+          </button>
+        </h2>
+        <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            Most schemes can be applied online. For document verification, physical visits may be needed.
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ 3 -->
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+            How long does approval take?
+          </button>
+        </h2>
+        <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+          <div class="accordion-body">
+            It varies by scheme, but usually within 15–30 working days after verification.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="text-center py-5">
+  <div class="container">
+    <h2 class="fw-bold">Ready to Apply?</h2>
+    <p class="mb-4">Start your application today and get support from Adivasi Bandhu.</p>
+    <a href="{% url 'scheme' %}" class="btn btn-primary btn-lg">Apply Now</a>
+  </div>
+</section>
+
+{% endblock %}

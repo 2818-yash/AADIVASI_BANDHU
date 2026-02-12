@@ -1,0 +1,188 @@
+/* ================================
+   MOBILE RESPONSIVENESS (SAFE)
+   ================================ */
+
+/* HERO SECTION */
+@media (max-width: 576px) {
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+    padding: 0 10px;
+  }
+}
+
+/* SEARCH BAR */
+@media (max-width: 576px) {
+  #searchInput {
+    max-width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+/* FILTER BUTTONS */
+@media (max-width: 576px) {
+  .btn-group {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    font-size: 13px;
+    padding: 6px 12px;
+  }
+}
+
+/* BOOTSTRAP CARD FIX (VERY IMPORTANT) */
+@media (max-width: 768px) {
+  #schemesGrid .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+}
+
+/* SCHEME CARD */
+@media (max-width: 576px) {
+  .card {
+    padding: 12px;
+  }
+
+  .card h5 {
+    font-size: 1rem;
+    line-height: 1.3;
+  }
+
+  .card p {
+    font-size: 0.9rem;
+  }
+
+  .btn.btn-success {
+    width: 100%;
+    font-size: 14px;
+  }
+}
+
+/* MODAL RESPONSIVENESS */
+@media (max-width: 576px) {
+  .modal-dialog {
+    margin: 10px;
+  }
+
+  .modal-title {
+    font-size: 1.1rem;
+  }
+
+  .modal-body {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  #modalPdf,
+  #modalLink {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+}
+
+
+/* =====================================
+   📱 RESPONSIVE FIX — ADD ONLY
+   ===================================== */
+
+/* 🔹 Tablet & below */
+@media (max-width: 992px) {
+
+  .hero h1 {
+    font-size: 2rem;
+  }
+
+  .hero p {
+    font-size: 1rem;
+  }
+
+  #searchInput {
+    max-width: 100%;
+    font-size: 14px;
+  }
+
+  .btn-group {
+    gap: 8px;
+  }
+
+  .filter-btn {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  #schemesGrid .col-md-4 {
+    flex: 0 0 50%;
+    max-width: 50%;
+  }
+}
+
+/* 🔹 Mobile (≤576px) */
+@media (max-width: 576px) {
+
+  .hero {
+    padding: 30px 15px;
+  }
+
+  .hero h1 {
+    font-size: 1.6rem;
+  }
+
+  .hero p {
+    font-size: 0.95rem;
+  }
+
+  #searchInput {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .btn-group {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .filter-btn {
+    margin: 4px;
+    font-size: 13px;
+  }
+
+  #schemesGrid .col-md-4 {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
+
+  .scheme-card {
+    padding: 14px;
+  }
+
+  .scheme-header {
+    font-size: 1.1rem;
+  }
+
+  .apply-btn2 {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  #modalPdf,
+  #modalLink {
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .modal-body {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+}
+
+
+
+

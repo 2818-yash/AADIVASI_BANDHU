@@ -1,0 +1,139 @@
+/* ================= RESET ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ================= PAGE CENTERING ================= */
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  background: #e5e5e5;
+
+  min-height: 100vh;
+  display: flex;
+  align-items: center;      /* vertical center */
+  justify-content: center;  /* horizontal center */
+
+  padding: 20px; /* mobile safe spacing */
+}
+
+/* ================= AUTH CONTAINER ================= */
+.auth-container {
+  max-width: 1000px;
+  width: 100%;
+  height: 520px;
+
+  background: #fff;
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+}
+
+/* ================= LEFT PANEL ================= */
+.auth-left {
+  width: 50%;
+  color: #fff;
+  padding: 70px 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.auth-left h2 {
+  font-size: 32px;
+  margin-bottom: 15px;
+}
+
+.auth-left p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.auth-left.blue {
+    background: linear-gradient(180deg, #34d399, #059669);
+
+}
+
+.auth-left.green {
+  background: linear-gradient(180deg, #34d399, #059669);
+}
+
+/* ================= RIGHT PANEL ================= */
+.auth-right {
+  width: 50%;
+  padding: 70px 60px;
+}
+
+.auth-right h1 {
+  font-size: 36px;
+  margin-bottom: 30px;
+}
+
+.auth-right input {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
+  border-radius: 6px;
+  border: 1px solid #e5e7eb;
+  background: #f3f4f6;
+  font-size: 14px;
+}
+
+.auth-right input:focus {
+  outline: none;
+  border-color: #2563eb;
+  background: #fff;
+}
+
+.auth-right button {
+  width: 100%;
+  padding: 14px;
+  background: #2563eb;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-right button:hover {
+  opacity: 0.9;
+}
+
+/* ================= GHOST BUTTON ================= */
+.ghost-btn {
+  display: inline-block;
+  padding: 12px 22px;
+  border: 2px solid #fff;
+  border-radius: 25px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.ghost-btn:hover {
+  background: rgba(255,255,255,0.2);
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 850px) {
+  body {
+    align-items: flex-start; /* allows scroll */
+  }
+
+  .auth-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .auth-left,
+  .auth-right {
+    width: 100%;
+    padding: 40px 30px;
+    text-align: center;
+  }
+}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Contact | Adivasi Bandhu{% endblock %}
+
+{% block content %}
+
+<!-- Background Image Wrapper -->
+<div style="background: url('{% static "images/image.png" %}') no-repeat center center/cover; padding: 40px 0; min-height: 690px; ">
+
+  <!-- Contact Section -->
+  <section class="contact d-flex align-items-center justify-content-center">
+    <div class="container">
+      <div class="row justify-content-center">
+
+        <!-- Contact Info -->
+        <div class="col-md-5 mb-4">
+          <div class="contact-info p-4 rounded shadow" style="background: rgba(0,0,0,0.6); backdrop-filter: blur(4px);">
+            <h2 class="text-white mb-3">Get in Touch</h2>
+            <p class="text-white">We’d love to hear from you. Reach out with any questions or feedback.</p>
+
+            <ul class="list-unstyled text-white">
+              <li><i class="fas fa-map-marker-alt me-2"></i>Tribal Welfare Office, India</li>
+              <li><i class="fas fa-phone me-2"></i>+91 98765 43210</li>
+              <li><i class="fas fa-envelope me-2"></i>support@adivasibandhu.org</li>
+            </ul>
+
+            <div class="social mt-3">
+              <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
+              <a href="#" class="text-white me-3"><i class="fab fa-twitter fa-lg"></i></a>
+              <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
+              <a href="#" class="text-white me-3"><i class="fab fa-linkedin fa-lg"></i></a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="col-md-7">
+          <div class="contact-form p-4 rounded shadow bg-white">
+            <h2 class="mb-3">Send a Message</h2>
+
+            {% if success %}
+            <div class="alert alert-success">
+                Your message has been sent successfully!
+            </div>
+            {% endif %}
+
+            <form method="POST">
+              {% csrf_token %}
+
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Your Name" name="name" required>
+              </div>
+
+              <div class="mb-3">
+                <input type="email" class="form-control" placeholder="Your Email" name="email" required>
+              </div>
+
+              <div class="mb-3">
+                <input type="text" class="form-control" placeholder="Subject" name="subject" required>
+              </div>
+
+              <div class="mb-3">
+                <textarea class="form-control" rows="5" placeholder="Your Message" name="message" required></textarea>
+              </div>
+
+              <div class="mb-3">
+                <button type="submit" class="btn btn-success px-4">Send</button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+textarea.form-control {
+    resize: vertical;
+    min-height: 161px;
+    padding: 12px;
+    font-size: 1rem;
+}
+</style>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+
+{% endblock %}
