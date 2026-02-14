@@ -12,7 +12,7 @@ SECRET_KEY = 'django-insecure-*s8zsh2%h45j5_6bdt3lj50)4g+u!e88xoovck=s9e#rn@3lsg
 DEBUG = True
 
 # ✅ Allow local + websocket
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost","192.168.1.11"]
 
 # ------------------------------
 # APPLICATIONS
@@ -147,3 +147,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # ------------------------------
 
 mimetypes.add_type("application/manifest+json", ".json", True)
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://192.168.1.11:9001",
+    "http://localhost:9001",
+]
