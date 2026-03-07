@@ -8,14 +8,15 @@
 /* ================= PAGE CENTERING ================= */
 body {
   font-family: "Inter", system-ui, sans-serif;
-  background: #e5e5e5;
+  /* background: #e5e5e5; */
+background: linear-gradient(to bottom, #abefb1, #dad6d6);
 
   min-height: 100vh;
   display: flex;
   align-items: center;      /* vertical center */
   justify-content: center;  /* horizontal center */
 
-  padding: 20px; /* mobile safe spacing */
+  padding: 250px; 
 }
 
 /* ================= AUTH CONTAINER ================= */
@@ -120,20 +121,77 @@ body {
 }
 
 /* ================= RESPONSIVE ================= */
-@media (max-width: 850px) {
+/* ================= EXTRA MOBILE RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+
   body {
-    align-items: flex-start; /* allows scroll */
+    padding: 20px; /* reduce huge padding on mobile */
+    align-items: center;
+    justify-content: center;
   }
 
   .auth-container {
-    flex-direction: column;
+    max-width: 100%;
     height: auto;
+    margin: 20px 0;
   }
 
   .auth-left,
   .auth-right {
-    width: 100%;
-    padding: 40px 30px;
-    text-align: center;
+    padding: 30px 25px;
+  }
+
+  .auth-left h2 {
+    font-size: 24px;
+  }
+
+  .auth-right h1 {
+    font-size: 26px;
+  }
+
+  .auth-left p {
+    font-size: 14px;
+  }
+
+  .auth-right input {
+    font-size: 13px;
+    padding: 12px;
+  }
+
+  .auth-right button {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .ghost-btn {
+    padding: 10px 18px;
+    font-size: 14px;
+  }
+}
+
+/* ================= SMALL MOBILE (VERY SMALL SCREENS) ================= */
+
+@media (max-width: 480px) {
+
+  body {
+    padding: 10px;
+  }
+
+  .auth-left h2 {
+    font-size: 22px;
+  }
+
+  .auth-right h1 {
+    font-size: 24px;
+  }
+
+  .auth-container {
+    border-radius: 6px;
+  }
+
+  .auth-left,
+  .auth-right {
+    padding: 25px 20px;
   }
 }

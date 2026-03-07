@@ -150,7 +150,8 @@
 </div>
 
 <script>
-  const CURRENT_USERNAME = "{{ request.user.username }}";
+  const CURRENT_USER_ID = "{{ request.user.id }}";
+  const IS_ADMIN = {{ request.user.is_superuser|yesno:"true,false" }};
 </script>
 <script src="{% static 'js/support_chat.js' %}"></script>
 
