@@ -11,7 +11,7 @@ SECRET_KEY = 'django-insecure-*s8zsh2%h45j5_6bdt3lj50)4g+u!e88xoovck=s9e#rn@3lsg
 
 DEBUG = True
 
-# ✅ Allow local + websocket
+
 ALLOWED_HOSTS = ["127.0.0.1", "localhost","192.168.1.11"]
 
 # ------------------------------

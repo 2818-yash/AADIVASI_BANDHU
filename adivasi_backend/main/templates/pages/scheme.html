@@ -2,7 +2,6 @@
 
 {% load static %}
 
-
 {% block title %}Adivasi Bandhu | Government Schemes{% endblock %}
 
 {% block content %}
@@ -17,10 +16,7 @@
 <div class="container mt-4">
   <input type="text" id="searchInput" class="form-control mb-4"
          placeholder="🔍 Search schemes by name...">
-
-         
 </div>
-
 
 <div class="container mb-4 text-center">
   <div class="btn-group flex-wrap" role="group">
@@ -31,10 +27,16 @@
   </div>
 </div>
 
+<!-- READ PAGE BUTTONS ON MAIN PAGE -->
+<div class="container text-center mb-3">
+  <button onclick="readPage()" class="btn btn-success btn-sm">🔊 Read Page</button>
+  <button onclick="stopReading()" class="btn btn-danger btn-sm">⏹ Stop</button>
+</div>
 
 <section class="container my-4">
   <div class="row" id="schemesGrid"></div>
 </section>
+
 
 <!-- DETAILS MODAL -->
 <div class="modal fade" id="detailsModal" tabindex="-1">
@@ -48,10 +50,16 @@
       <div class="modal-body">
         <p><strong>Category:</strong> <span id="modalCategory"></span></p>
         <p id="modalDescription" style="white-space: pre-line;"></p>
-        <a id="modalPdf" class="btn btn-primary mt-2" target="_blank">
-        <i class="bi bi-file-earmark-pdf"></i> View PDF
-        </a>
 
+        <!--  READ SCHEME DETAILS BUTTONS INSIDE MODAL -->
+        <div class="mb-2">
+          <button onclick="readModal()" class="btn btn-success btn-sm">🔊 Read Details</button>
+          <button onclick="stopReading()" class="btn btn-danger btn-sm">⏹ Stop</button>
+        </div>
+
+        <a id="modalPdf" class="btn btn-primary mt-2" target="_blank">
+          <i class="bi bi-file-earmark-pdf"></i> View PDF
+        </a>
         <p><a id="modalLink" href="#" target="_blank" class="btn btn-success mt-2">Apply Now</a></p>
       </div>
     </div>
@@ -59,11 +67,44 @@
 </div>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
-<link rel="stylesheet"
- href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 <link rel="stylesheet" href="{% static 'css/scheme.css' %}"/>
 
 <script src="{% static 'js/gov_scheme.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- READ PAGE SCRIPT -->
+<script>
+  // Read all scheme cards on main page
+  function readPage() {
+    const text = document.getElementById("schemesGrid").innerText;
+    speechSynthesis.cancel();
+    const s = new SpeechSynthesisUtterance(text);
+    s.lang = "mr-IN";
+    speechSynthesis.speak(s);
+  }
+
+  // Read scheme details inside modal
+  function readModal() {
+    const title = document.getElementById("modalTitle").innerText;
+    const category = document.getElementById("modalCategory").innerText;
+    const description = document.getElementById("modalDescription").innerText;
+    const text = title + ". Category: " + category + ". " + description;
+    speechSynthesis.cancel();
+    const s = new SpeechSynthesisUtterance(text);
+    s.lang = "mr-IN";
+    speechSynthesis.speak(s);
+  }
+
+  // Stop reading
+  function stopReading() {
+    speechSynthesis.cancel();
+  }
+
+  // Auto stop reading when modal closes
+  document.getElementById("detailsModal").addEventListener("hidden.bs.modal", () => {
+    speechSynthesis.cancel();
+  });
+</script>
 
 {% endblock %}
