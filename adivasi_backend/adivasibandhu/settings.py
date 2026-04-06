@@ -7,12 +7,12 @@ import mimetypes
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-import os
+SECRET_KEY = 'django-insecure-*s8zsh2%h45j5_6bdt3lj50)4g+u!e88xoovck=s9e#rn@3lsg'
 
-SECRET_KEY = os.environ.get('SECRET_KEY', 'fallback-secret-key')
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
+
+ALLOWED_HOSTS = ["127.0.0.1", "localhost","192.168.1.11"]
 
 # ------------------------------
 # APPLICATIONS
@@ -21,8 +21,8 @@ ALLOWED_HOSTS = ['.onrender.com', 'localhost', '127.0.0.1']
 INSTALLED_APPS = [
     'rest_framework',
     'drf_spectacular',
-    # 'daphne',
-    # 'channels', 
+    'daphne',
+    'channels', 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -37,10 +37,7 @@ INSTALLED_APPS = [
 # ------------------------------
 
 MIDDLEWARE = [
-    
-
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -76,7 +73,7 @@ TEMPLATES = [
 
 # ❌ OLD (do not remove, keep for admin / normal HTTP)
 WSGI_APPLICATION = "adivasibandhu.wsgi.application"
-# ASGI_APPLICATION = "adivasibandhu.asgi.application"
+ASGI_APPLICATION = "adivasibandhu.asgi.application"
 
 
 # ------------------------------
@@ -160,8 +157,8 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
-EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')
+EMAIL_HOST_USER = 'divyanshrajshrivastava@gmail.com'   # your email
+EMAIL_HOST_PASSWORD = 'qvvvgffhnrsgubrw' # app password
 
 DEFAULT_FROM_EMAIL = 'divyanshrajshrivastava@gmail.com'
 
@@ -180,5 +177,4 @@ mimetypes.add_type("application/manifest+json", ".json", True)
 CSRF_TRUSTED_ORIGINS = [
     "http://192.168.1.11:9001",
     "http://localhost:9001",
-    "https://*.onrender.com",
 ]
